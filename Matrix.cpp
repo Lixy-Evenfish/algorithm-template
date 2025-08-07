@@ -1,3 +1,7 @@
+#include <bits/stdc++.h>
+using namespace std;
+const int mod;
+
 struct Matrix{
     int n,m;
     vector<vector<int>> a;
