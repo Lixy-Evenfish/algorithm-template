@@ -1,8 +1,6 @@
 #include<bits/stdc++.h>
 #define int long long
-
 using namespace std;
-
 
 struct info {
 	int l,r;
@@ -47,16 +45,20 @@ struct segment_tree{
 		};
 		build(build,1,0,len);
 	}
-	void modify(int np,int x,info &v)
+	void modify(int np,int x, int v)
 	{
 		if(seg[np].l == seg[np].r)
 		{
-			seg[np] = v;
+			seg[np].sum += v;
 		}
-		int mid = seg[np].l + seg[np].r >> 1;
-		push(np);
-		if(x <= mid) modify(2*np,x,v);
-		else modify(2*np+1,x,v);
+		else
+		{
+			int mid = seg[np].l + seg[np].r >> 1;
+			push(np);
+			if(x <= mid) modify(2*np,x,v);
+			else modify(2*np+1,x,v);
+			pull(np);
+		}
 	}
 	void rangeadd(int np,int x,int y,int v)
 	{
