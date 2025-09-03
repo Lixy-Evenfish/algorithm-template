@@ -17,7 +17,6 @@ struct EBCC{
 	}
 	
 	void tarjan(int u,int p){
-		int son = 0;
 		low[u] = dfn[u] = ++ cur;
 		stk.push_back(u);
 		bool flag = false;
@@ -27,7 +26,6 @@ struct EBCC{
 				continue;
 			}
 			if(!dfn[i]){
-				son ++;
 				tarjan(i,u);
 				low[u] = min(low[u],low[i]);
 			}
