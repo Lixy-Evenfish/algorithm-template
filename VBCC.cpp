@@ -50,7 +50,6 @@ struct VBCC{
 	void work(){
 		for(int i = 1; i <= n; i ++){
 			if(!dfn[i]){
-				stk.clear();
 				tarjan(i,-1);
 			}
 		}
