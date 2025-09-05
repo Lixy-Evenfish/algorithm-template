@@ -15,7 +15,6 @@ struct LCA{
 		depth.resize(n+1);
 	}
 	void dfs(int u,int p){
-		//cout << u << ' ' << p << endl;
 		depth[u] = depth[p] + 1;
 		fa[u][0] = p;
 		for(int i = 1; i <= k; i ++){

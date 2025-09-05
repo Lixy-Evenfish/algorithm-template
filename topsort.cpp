@@ -3,24 +3,22 @@
 using namespace std;
 
 // 拓扑排序 (有向图)
-    vector<int> deg(n+1);
+    vector<int> onloop(n+1,1);
 	queue<int> q;
-	for(int i = 1; i <= n; i ++)
-	{
-		deg[i] = v[i].size();
-		if(deg[i] == 0) q.push(i);
-		
+	for(int i = 1; i <= n; i ++){
+		if(!deg[i]) {
+			q.push(i);
+			onloop[i] = 0;
+		}
 	}
-	while(!q.empty())
-	{
-		auto t = q.front();
+	while(q.size()){
+		int t = q.front();
 		q.pop();
-		for(auto i : v[t])
-		{
+		for(int i : v[t]){
 			deg[i] --;
-			if(deg[i] == 0)
-			{
+			if(!deg[i]){
 				q.push(i);
+				onloop[i] = 0;
 			}
 		}
 	}
@@ -33,7 +31,7 @@ using namespace std;
 	for(int i = 1; i <= n; i ++)
 	{
 		deg[i] = v[i].size();
-		if(deg[i] == 1) q.push(i);
+		if(deg[i] <= 1) q.push(i);
 	}
 	while(!q.empty())
 	{

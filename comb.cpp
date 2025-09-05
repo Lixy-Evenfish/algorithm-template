@@ -1,7 +1,7 @@
 #include<bits/stdc++.h>
 #define int long long
 using namespace std;
-
+const int mod;
 struct Comb{
 	int n;
 	vector<int> fact,infact;
