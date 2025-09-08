@@ -4,26 +4,38 @@
 using namespace std;
 
 void solve(){
-    auto cal = [&](double x) -> double{
+    auto check = [&](double x) -> double{
 		
 	};
 	double l = -2e6,r = 2e6;
 	while(r - l > 1e-9) {
-		double lmid = (2*l + r) / 3;
-		double rmid = (l + 2*r) / 3;
-		double lans = cal(lmid), rans = cal(rmid);
-		
+		double lmid = l + (r - l) / 3, rmid = r - (r - l) / 3;
+
 		// 求凹函数的极小值
-		if(lans <= rans) r = rmid;
+		if(check(lmid) <= check(rmid)) r = rmid;
 		else l = lmid;
 
          // 求凸函数的极大值
-        if(lans <= rans) l = lmid;
+        if(check(lmid) <= check(rmid)) l = lmid;
         else r = rmid;
 		
 	}
-    auto cal = [&](int x)->int{
+    auto check = [&](int x)->int{
 
     };
-    
+
+    int l = -2e6,r = 2e6;
+	while(l < r){
+		int lmid = l + (r-l)/3, rmid = r - (r-l)/3;
+
+		//如果是中间凸的单峰函数是<号，中间凹是>号。
+		//求凹函数的极小值
+		if(check(lmid) > check(rmid)) l = lmid + 1; 
+		else r = rmid - 1;
+
+		//求凸函数的极大值
+		if(check(lmid) < check(rmid)) l = lmid + 1;
+		else r = rmid - 1;
+	}
+
 }
