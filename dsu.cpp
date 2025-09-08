@@ -25,8 +25,10 @@ struct Dsu{
 	void merge(int x,int y)
 	{
 		x = find(x),y = find(y);
-		siz[x] += siz[y];
-		f[y] = x;
+		if(x != y){
+			siz[x] += siz[y];
+			f[y] = x;
+		}
 	}
 	
 	int size(int x) {
