@@ -1,17 +1,21 @@
 #include<bits/stdc++.h>
 #define int long long
 
-//ÏÂÈ¡Õû
+//ä¸‹å–æ•´
 long long r;
 for(int l = 1; l <= n; l = r + 1)
 {
-		r = k/(k/l);
-		/*
-		your code
-		*/
+    if(k/l == 0)
+    {
+        r = 8e18;       
+    }
+    else r = min(k/(k/l),n);
+    \*
+        code
+    *\
 }
 
-//ÉÏÈ¡Õû
+//ä¸Šå–æ•´
 int r;
 for(int l = 1; l <= n; l = r + 1)
 {
