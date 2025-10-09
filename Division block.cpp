@@ -18,7 +18,7 @@ void solve(){
 
 	//下取整
 	long long r;
-	for(int l = a; l <= n ; l = r + 1)
+	for(int l = 1; l <= n ; l = r + 1)
 	{
 		if((k-1)/l == 0)
 		{
