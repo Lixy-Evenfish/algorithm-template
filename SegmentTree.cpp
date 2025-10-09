@@ -74,7 +74,7 @@ struct Segtree{
 			//ĞèÒªĞŞ¸Ä£¡£¡£¡
 			seg[np].sum += v;
 			seg[np].mx += v;
-			seg[np].mi -= v;
+			seg[np].mi += v;
 		}
 		else
 		{
