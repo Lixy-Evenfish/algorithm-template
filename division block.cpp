@@ -11,9 +11,6 @@ for(int l = 1; l <= n; l = r + 1)
         r = 8e18;       
     }
     else r = min(k/(k/l),n);
-    \*
-        code
-    *\
 }
 
 
@@ -27,7 +24,4 @@ for(int l = a; l <= n ; l = r + 1)
 		r = 8e18;
 	}
 	else r = min((k-1)/((k-1)/l),n);
-	\*
-        code
-    *\
 }
