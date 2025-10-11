@@ -8,7 +8,6 @@ void solve(){
 	auto dijkstra = [&](int s) -> void
 	{
 		priority_queue<PII,vector<PII>,greater<PII>> heap;
-    	int s;
    		dist[s] = 0;
 		heap.push({0,s});
 		while(!heap.empty())
