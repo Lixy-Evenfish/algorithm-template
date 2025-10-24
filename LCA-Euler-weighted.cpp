@@ -2,13 +2,13 @@
 #define int long long
 
 using namespace std;
-
+typedef pair<int,int> PII;
 struct LCA{
 	int n,k,tot;
-	vector<vector<int>> &v;
+	vector<vector<PII>> &v;
 	vector<int> dfn,depth,pos;
-	vector<array<int,20>> st,idx;
-	LCA(vector<vector<int>> &g): v(g){
+	vector<array<int,24>> st,idx;
+	LCA(vector<vector<PII>> &g): v(g){
 		n = g.size()-1;
 		k = __lg(2*n+1);
 		pos.resize(n+1);
@@ -23,9 +23,9 @@ struct LCA{
 		dfn[++tot] = u;
 		pos[u] = tot;
 		depth[u] = dis;
-		for(int i : v[u]){
+		for(auto [d,i] : v[u]){
 			if(i != p){
-				dfs(i,u,dis + 1);
+				dfs(i,u,dis + d);
 				dfn[++tot] = u;  // 回溯时记录父节点
 			}
 		}
@@ -39,7 +39,6 @@ struct LCA{
 			st[i][0] = depth[dfn[i]];
 			idx[i][0] = dfn[i];
 		}
-		
 		// 构建ST表
 		for(int j = 1; j <= k; j++){
 			for(int i = 1; i + (1 << j) - 1 <= tot; i++){
@@ -64,5 +63,9 @@ struct LCA{
 		}else{
 			return idx[r - (1 << len) + 1][len];
 		}
+	}
+	
+	int dis(int x,int y){
+		return depth[x] + depth[y] - 2*depth[query(x,y)];
 	}
 };
