@@ -42,7 +42,7 @@ void tarjan(int u)
 
 
 
-    \\判断有无解
+    //判断有无解
 	for(int i = 1; i <= 2*n; i ++)
 	{
 		if(!dfn[i]) tarjan(i);
@@ -55,7 +55,7 @@ void tarjan(int u)
 			return;
 		}
     }
-    \\存储答案
+    //存储答案
 	vector<int> ans;
 	for(int i = 1; i <= n; i ++)
 	{
