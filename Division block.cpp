@@ -4,7 +4,7 @@ using namespace std;
 void solve(){
 	int n,k;
 	cin >> n >> k;
-	//上取整
+	//下取整
 	long long r;
 	for(int l = 1; l <= n; l = r + 1)
 	{
@@ -16,7 +16,7 @@ void solve(){
 	}
 
 
-	//下取整
+	//上取整
 	long long r;
 	for(int l = 1; l <= n ; l = r + 1)
 	{
