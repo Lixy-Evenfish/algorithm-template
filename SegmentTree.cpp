@@ -1,80 +1,75 @@
 #include<bits/stdc++.h>
 #define int long long
+
 using namespace std;
 
-struct info {
-	//需要修改！！！
+struct info{
 	int l,r;
-	int sum;
-	int mi,mx;
+	/*填入需要维护的内容*/ 
+	//	int mx,mi;
+	info(){}
+	info(int nl,int nr){
+		l = nl,r = nr;
+		/*将填入变量初始化为0*/
+		// mx = 0,mi = 0;
+	}
 };
-info operator+ (const info &l,const info &r) {
-	//需要修改！！！
-	info a;
-	a.l = min(l.l,r.l),a.r = max(l.r,r.r);
-	a.sum = l.sum + r.sum;
-	a.mx = max(l.mx,r.mx);
-	a.mi = min(l.mi,r.mi);
+
+info operator+(const info &l,const info &r){
+	info a = {l.l,r.r};
+	/*填入合并区间的方式*/
+	//a.mi = min(l.mi,r.mi),a.mx = max(l.mx,r.mx);
 	return a;
 }
+
 struct Segtree{
-	const int len;
+	int n;
 	vector<info> seg;
-	vector<int> tag;
-	Segtree(int n1) :len(n1),seg(4*n1+1),tag(4*n1+1) {}
+	vector<int> tag,init;
+	
+	Segtree(vector<int> a):init(a){
+		n = a.size() - 1;
+		seg.resize(n << 2 | 2);
+		tag.resize(n << 2 | 2);
+	}
 	void add(int np,int v)
 	{
-		//需要修改！！！
-		tag[np] += v;
-		seg[np].mx += v;
-		seg[np].mi -= v;
-		seg[np].sum += (seg[np].r-seg[np].l+1)*v;
+		/*单点修改的方式*/
+		//seg[np].mx += v,seg[np].mi += v;
+	}
+	
+	void work(){
+		auto build = [&](auto &&self,int np,int l,int r) -> void
+		{
+			if (l == r){
+				seg[np] = {l, r};
+				add(np,init[l]);
+			}
+			else
+			{
+				seg[np] = {l, r};
+				int mid = l + r >> 1;
+				self(self,np << 1, l, mid), self(self,np << 1 | 1, mid + 1, r);
+				pull(np);
+			}
+		};
+		build(build,1,1,n);
 	}
 	void push(int np)
 	{
 		add(np << 1,tag[np]),add(np << 1 | 1,tag[np]);
+		tag[np << 1] += tag[np],tag[np << 1 | 1] += tag[np];
 		tag[np] = 0;
 	}
 	void pull(int id) {
 		seg[id] = seg[id << 1] + seg[id << 1 | 1];
 	}
-	void init(vector<int> init)
-	{
-		auto build = [&](auto &&self,int np,int l,int r) -> void
-		{
-			if (l == r) seg[np] = {l, r, init[r]};
-			else
-			{
-				seg[np] = {l, r};
-				int mid = l + r >> 1;
-				self(self,np << 1, l, mid), self(self,np << 1 | 1, mid + 1, r);
-				pull(np);
-			}
-		};
-		build(build,1,0,len);
-	}
-	void init(){
-		auto build = [&](auto &&self,int np,int l,int r) -> void
-		{
-			if (l == r) seg[np] = {l, r, 0};
-			else
-			{
-				seg[np] = {l, r};
-				int mid = l + r >> 1;
-				self(self,np << 1, l, mid), self(self,np << 1 | 1, mid + 1, r);
-				pull(np);
-			}
-		};
-		build(build,1,0,len);
-	}
+
 	void modify(int np,int x, int v)
 	{
 		if(seg[np].l == seg[np].r)
 		{
-			//需要修改！！！
-			seg[np].sum += v;
-			seg[np].mx += v;
-			seg[np].mi += v;
+			add(np,v);
 		}
 		else
 		{
@@ -90,6 +85,7 @@ struct Segtree{
 		if(seg[np].l >= x && seg[np].r <= y)
 		{
 			add(np,v);
+			tag[np] += v;
 		}
 		else{
 			push(np);
