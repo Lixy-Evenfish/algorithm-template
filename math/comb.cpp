@@ -29,8 +29,12 @@ struct Comb{
 			//cout << fact[i] << ' ';
 		}
 	}
-	int C(int a,int b)
+	int C(int a,int b) //从 b 个里选 a 个的种类数
 	{
 		return (((1ll*fact[a]*infact[b])%mod)*infact[a-b]) % mod;
+	}
+	int A(int a,int b)
+	{
+		return (1ll*fact[a]*infact[b]) % mod;
 	}
 }comb(5e5 + 10);
