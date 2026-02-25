@@ -58,9 +58,7 @@ void solve(){
 		
 		mi = 1e9;
 		root = u;
-		getroot(getroot,u,-1);
-		//cout << root << endl;
-		
+		getroot(getroot,u,-1);		
 		
 		/*在此处填写点分治计算答案代码*/
 		/*root 为重心*/	
