@@ -61,33 +61,3 @@ struct Xorbasis{
 	}
 
 };
-
-void solve(){
-	int n,q;
-	cin >> n;
-	Xorbasis basis;
-	for(int i = 1; i <= n; i ++){
-		int x;
-		cin >> x;
-		basis.insert(x);
-	}
-	cin >> q;
-	basis.work();
-	while(q --){
-		int x;
-		cin >> x;
-		cout << basis.getxth(x) << '\n';
-	}
-}
-
-signed main(){
-	ios::sync_with_stdio(false);
-	cin.tie(0);
-	int t = 1;
-	cin >> t;
-	int tt = 1;
-	while(t --){
-		cout << "Case #" << tt ++ << ':'<< '\n';
-		solve();
-	}
-}
